@@ -1,7 +1,7 @@
 Hello (AWS) Lambda with Terraform
 =================================
 
-[![CircleCI](https://circleci.com/gh/TailorDev/hello-lambda.svg?style=svg&circle-token=e7e667e29ca868d27a239f31aa585d78ebc57827)](https://circleci.com/gh/TailorDev/hello-lambda)
+[![Build Status](https://travis-ci.org/BWITS/Terraform-lambda-apigateway.svg?branch=master)](https://travis-ci.org/BWITS/Terraform-lambda-apigateway)
 
 This project is an example of a Python (AWS)
 [Lambda](https://aws.amazon.com/lambda/) exposed with [API
@@ -48,29 +48,26 @@ Terraform](https://www.terraform.io/intro/getting-started/install.html) first.
 
 Clone this repository, then run:
 
-    $ make bootstrap
+    $ make get
 
 Create a `terraform.tfvars` file with the content below. This step is optional
 as Terraform will ask you to fill in the different values, but it is convenient.
 
 ```ini
-aws_account_id = "account-id"
-aws_access_key = "access-key"
-aws_secret_key = "secret-key"
 aws_region     = "eu-west-1"
 ```
 
 You are now ready to use Terraform!
 
-    $ terraform plan
+    $ make plan
 
 If everything is OK, you can build the whole infrastructure:
 
-    $ terraform apply
+    $ make apply
 
 You can destroy all the components by running:
 
-    $ terraform destroy
+    $ make destroy
 
 For more information, please read [the Terraform
 documentation](https://www.terraform.io/docs/index.html).

@@ -1,3 +1,9 @@
+provider "aws" {
+  region     = "${var.aws_region}"
+}
+
+data "aws_caller_identity" "current" { }
+
 # First, we need a role to play with Lambda
 resource "aws_iam_role" "iam_role_for_lambda" {
   name = "iam_role_for_lambda"
@@ -61,7 +67,7 @@ module "hello_get" {
   path        = "${aws_api_gateway_resource.hello_api_res_hello.path}"
   lambda      = "${module.lambda.name}"
   region      = "${var.aws_region}"
-  account_id  = "${var.aws_account_id}"
+  account_id  = "${data.aws_caller_identity.current.account_id}"
 }
 
 # This is the code for method POST /hello, that will talk to the second lambda
@@ -73,7 +79,7 @@ module "hello_post" {
   path        = "${aws_api_gateway_resource.hello_api_res_hello.path}"
   lambda      = "${module.lambda_post.name}"
   region      = "${var.aws_region}"
-  account_id  = "${var.aws_account_id}"
+  account_id  = "${data.aws_caller_identity.current.account_id}"
 }
 
 # We can deploy the API now! (i.e. make it publicly available)
